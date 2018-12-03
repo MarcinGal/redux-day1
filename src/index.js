@@ -20,14 +20,19 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
     window.__REDUX_DEVTOOLS_EXTENSION__())
 
-console.warn(store.getState())
+// console.warn(store.getState())
 
 store.dispatch(addTodo('Go shoping'))
 store.dispatch(addTodo('Some other things'))
 store.dispatch(addTodo('Clean the dishes'))
 store.dispatch(increment())
 
-console.warn(store.getState())
+window.letIncreaseCounter = () => store.dispatch(increment())
+window.justAddTodo = (text) => store.dispatch(addTodo(text))
+
+// console.warn(store.getState())
+
+
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
