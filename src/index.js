@@ -4,7 +4,9 @@ import './index.css';
 import App from './App';
 //REDUX IMPORTS
 import { combineReducers, createStore } from 'redux'
-import todos from './store'
+import todos, { addTodo } from './store'
+
+
 
 //REDUX GO HERE
 const rootReducer = combineReducers({
@@ -12,6 +14,13 @@ const rootReducer = combineReducers({
 })
 
 const store = createStore(rootReducer)
+
+console.warn(store.getState())
+
+store.dispatch(addTodo('Go shopiing'))
+
+console.warn(store.getState())
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
