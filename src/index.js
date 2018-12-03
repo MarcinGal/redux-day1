@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 //REDUX IMPORTS
 import { combineReducers, createStore } from 'redux'
-import todos, { addTodo } from './store'
+import todos, { addTodo } from './store/toDos'
+import counter from './store/counter'
 
 
 
 //REDUX GO HERE
 const rootReducer = combineReducers({
+    counter,
     todos
 })
 
