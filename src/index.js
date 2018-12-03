@@ -5,7 +5,7 @@ import App from './App';
 //REDUX IMPORTS
 import { combineReducers, createStore } from 'redux'
 import todos, { addTodo } from './store/toDos'
-import counter from './store/counter'
+import counter, { increment } from './store/counter'
 
 
 
@@ -25,6 +25,7 @@ console.warn(store.getState())
 store.dispatch(addTodo('Go shoping'))
 store.dispatch(addTodo('Some other things'))
 store.dispatch(addTodo('Clean the dishes'))
+store.dispatch(increment())
 
 console.warn(store.getState())
 
