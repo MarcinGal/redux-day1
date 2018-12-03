@@ -14,10 +14,3 @@ export default (state = {cartTotal: 0}, action) => {
         return state
     }
 }
-
-
-/*
-type add to card
-podpiąc reducer w index.js
-w combine reducer dodac go jako trzeci
-*/
