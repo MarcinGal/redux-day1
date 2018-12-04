@@ -7,6 +7,7 @@ import { combineReducers, createStore } from 'redux'
 import todos, { addTodo, filterTodos, toggleTodo, deleteTodo } from './store/todos'
 import counter, { increment, decrement, reset } from './store/counter'
 import cart, { addToCart } from './store/cart'
+import { Provider } from 'react-redux'
 
 
 
@@ -39,14 +40,15 @@ window.letIncreaseCounter = () => store.dispatch(increment())
 window.addTodo = (text) => store.dispatch(addTodo(text))
 window.letDecreaseCounter = () => store.dispatch(decrement())
 window.addPriceToCart = (price) => store.dispatch(addToCart(price))
-window.filterTodos = (filterText) => store.dispatch(filterTodos(filterText)) 
+window.filterTodos = (filterText) => store.dispatch(filterTodos(filterText))
 window.toggleTodo = (index) => store.dispatch(toggleTodo(index))
 window.deleteTodo = (index) => store.dispatch(deleteTodo(index))
 // console.warn(store.getState())
 
 
-
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>, document.getElementById('root'));
 
 

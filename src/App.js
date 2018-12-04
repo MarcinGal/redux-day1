@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import TodoList from './TodoList'
 
 class App extends Component {
   render() {
-    return (
-      <div>Hi Redux</div>
-    )
+    return <TodoList todos={[
+    {text: 'First Todo from App'},
+    {text: 'Second Todo from App'}
+    ]}
+      />
 }
 }
 
