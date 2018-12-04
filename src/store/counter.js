@@ -21,7 +21,7 @@ export default (state = 0, action) => {
         case DECREMENT:
             return (state - 1)
         case RESET:
-            return (state)
+            return (state = 0)
         default:
             return state
     }
