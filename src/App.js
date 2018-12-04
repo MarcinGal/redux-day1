@@ -4,16 +4,14 @@ import { connect } from 'react-redux'
 import TodoList from './TodoList'
 
 const mapStateToProps = (state) => ({
-
+todos:
+  state.todos.allTodos
 })
 
 class App extends Component {
   render() {
-    return <TodoList todos={[
-    {text: 'First Todo from App'},
-    {text: 'Second Todo from App'}
-    ]}
-      />
+    console.log('App.props', this.props)
+    return <TodoList todos={this.props.todos}/>
 }
 }
 
