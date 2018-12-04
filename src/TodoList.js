@@ -33,7 +33,6 @@ class TodoList extends React.Component {
         this.props._deleteTodo(index)
     }
 
-
     render() {
         return (
             <div>
@@ -41,14 +40,13 @@ class TodoList extends React.Component {
                 <button onClick={this.handleButtonClick}>Add todo</button>
                 {this.props._todos.map((todo, index) =>
                     <div
-                        style={{ textDecoration: todo.completed ? 'underline' : 'none' }}
+                        style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
                         onClick={() => this.handleTodoClick(index)}
                         key={todo.text}>
                         <div>{todo.text}
                             <button onClick={() => this.handleDeleteClick(index)}>X</button>
                         </div>
                     </div>
-
                 )}
             </div>
         )
