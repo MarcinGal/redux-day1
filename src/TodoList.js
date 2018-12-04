@@ -33,31 +33,41 @@ class TodoList extends React.Component {
         this.props._deleteTodo(index)
     }
 
+    renderInput() {
+        return <div>
+            <input onChange={this.handleInputChange} />
+            <button onClick={this.handleButtonClick}>Add todo</button>
+        </div>
+    }
+
+    renderList() {
+        return this.props._todos.map((todo, index) =>
+            <div
+                style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+                onClick={() => this.handleTodoClick(index)}
+                key={todo.text}>
+                <div
+                    style={{
+                        margin: '3px',
+                        padding: '5px',
+                        border: '1px solid black'
+                    }}
+                >{todo.text}
+                    <button
+                        style={{
+                            marginLeft: '10px'
+                        }}
+                        onClick={() => this.handleDeleteClick(index)}>X</button>
+                </div>
+            </div>
+        )
+    }
+
     render() {
         return (
             <div>
-                <input onChange={this.handleInputChange} />
-                <button onClick={this.handleButtonClick}>Add todo</button>
-                {this.props._todos.map((todo, index) =>
-                    <div
-                        style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-                        onClick={() => this.handleTodoClick(index)}
-                        key={todo.text}>
-                        <div
-                        style={{
-                            margin: '3px',
-                            padding: '5px',
-                            border: '1px solid black'
-                        }}
-                        >{todo.text}
-                            <button 
-                            style={{
-                                marginLeft: '10px'
-                            }}
-                            onClick={() => this.handleDeleteClick(index)}>X</button>
-                        </div>
-                    </div>
-                )}
+                {this.renderInput()}
+                {this.renderList()}
             </div>
         )
     }
