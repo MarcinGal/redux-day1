@@ -5,7 +5,8 @@ const DELETE_TODO = 'DELETE_TODO'
 
 const INITIAL_STATE = {
     allTodos: [],
-    visibleTodos: []
+    visibleTodos: [],
+    filter: ''
 }
 
 export const addTodo = text => ({
@@ -32,31 +33,45 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ADD_TODO:
             const newTodo = { text: action.text, completed: false }
+            const newVisibleTodos = newTodo.text.includes(state.filter)
+            ? [...state.visibleTodos, newTodo]
+            : state.visibleTodos
             return {
                 ...state,
-                allTodos: [...state.allTodos, newTodo]
+                allTodos: [...state.allTodos, newTodo],
+                visibleTodos: newVisibleTodos
             }
         case FILTER_TODO:
             return {
                 ...state,
-                visibleTodos: state.allTodos.filter(
-                    todo => todo.text.includes(action.input)
-                )
+                filter: action.input,
+                visibleTodos: getVisibleTodos(state.allTodos, action.text)
             }
         case TOGGLE_TODO:
+        const allTodosWithToggled = state.allTodos.map((todo, index) => (index === action.index)
+        ? {...todo, completed: !todo.completed}
+        : todo
+        )
             return {
                 ...state,
-                allTodos: state.allTodos.map((todo, index) => (index === action.index)
-                    ? { ...todo, completed: !todo.completed }
-                    : todo
-                )
+                allTodos: 
+                allTodosWithToggled,
+                visibleTodos: getVisibleTodos(allTodosWithToggled, state.filter)
             }
             case DELETE_TODO:
+            const allTodosWithDeleted = state.allTodos.filter((todo, index) => !(index === action.index))
             return {
                 ...state,
-                allTodos: state.allTodos.filter((todo, index) => !(index === action.index))
+                allTodos: allTodosWithDeleted,
+                visibleTodos: getVisibleTodos(allTodosWithDeleted, state.filter)
             }
         default:
             return state
     }
+}
+
+function getVisibleTodos(allTodos, filter) {
+    return allTodos.filter(
+        todo => todo.text.includes(filter)
+    )
 }

@@ -32,7 +32,7 @@ store.dispatch(increment())
 store.dispatch(decrement())
 store.dispatch(reset())
 store.dispatch(addToCart())
-store.dispatch(filterTodos())
+store.dispatch(filterTodos(''))
 store.dispatch(toggleTodo())
 store.dispatch(deleteTodo())
 

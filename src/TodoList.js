@@ -1,23 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { addTodo, toggleTodo, deleteTodo } from './store/todos'
+import { addTodo, toggleTodo, deleteTodo, filterTodos } from './store/todos'
+import './todo.css'
 
 const mapStateToProps = store => ({
-    _todos: store.todos.allTodos
+    _todos: store.todos.visibleTodos
 })
 
 const mapDispatchToProps = dispatch => ({
     _addTodo: text => dispatch(addTodo(text)),
     _toggleTodo: index => dispatch(toggleTodo(index)),
-    _deleteTodo: index => dispatch(deleteTodo(index))
+    _deleteTodo: index => dispatch(deleteTodo(index)),
+    _filterTodos: text => dispatch(filterTodos(text))
 })
 
 class TodoList extends React.Component {
-    state = { value: '' }
+    state = {
+        value: '',
+        filterValue: ''
+    }
 
     handleInputChange = event => {
         this.setState({ value: event.target.value })
+    }
+
+    handleFilterChange = event => {
+        this.setState({ filterValue: event.target.value })
     }
 
     handleButtonClick = () => {
@@ -33,30 +42,38 @@ class TodoList extends React.Component {
         this.props._deleteTodo(index)
     }
 
+    handleFilterClick = () => {
+        this.props._filterTodos(this.state.filterValue)
+    }
+
     renderInput() {
-        return <div>
+        return <div
+            className={'menu'}
+        >
             <input onChange={this.handleInputChange} />
             <button onClick={this.handleButtonClick}>Add todo</button>
+        </div>
+    }
+
+    renderFilter() {
+        return <div>
+            <input onChange={this.handleFilterChange} />
+            <button onClick={this.handleFilterClick} >Filter</button>
         </div>
     }
 
     renderList() {
         return this.props._todos.map((todo, index) =>
             <div
+                className={'divList'}
                 style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
                 onClick={() => this.handleTodoClick(index)}
                 key={todo.text}>
                 <div
-                    style={{
-                        margin: '3px',
-                        padding: '5px',
-                        border: '1px solid black'
-                    }}
+                    className={'listItem'}
                 >{todo.text}
                     <button
-                        style={{
-                            marginLeft: '10px'
-                        }}
+                        className={'deleteItemButton'}
                         onClick={() => this.handleDeleteClick(index)}>X</button>
                 </div>
             </div>
@@ -67,6 +84,7 @@ class TodoList extends React.Component {
         return (
             <div>
                 {this.renderInput()}
+                {this.renderFilter()}
                 {this.renderList()}
             </div>
         )

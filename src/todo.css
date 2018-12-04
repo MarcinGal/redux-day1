@@ -1,0 +1,18 @@
+.menu {
+    margin: 20px
+}
+
+.divList {
+margin: 20px;
+width: 25%
+}
+
+.listItem {
+    margin: 3px;
+    padding: 5px;
+     border: 1px solid black
+}
+
+.deleteItemButton {
+   margin: 10px;
+}
