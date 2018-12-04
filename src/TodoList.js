@@ -43,8 +43,18 @@ class TodoList extends React.Component {
                         style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
                         onClick={() => this.handleTodoClick(index)}
                         key={todo.text}>
-                        <div>{todo.text}
-                            <button onClick={() => this.handleDeleteClick(index)}>X</button>
+                        <div
+                        style={{
+                            margin: '3px',
+                            padding: '5px',
+                            border: '1px solid black'
+                        }}
+                        >{todo.text}
+                            <button 
+                            style={{
+                                marginLeft: '10px'
+                            }}
+                            onClick={() => this.handleDeleteClick(index)}>X</button>
                         </div>
                     </div>
                 )}
