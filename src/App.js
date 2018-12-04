@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 
 import TodoList from './TodoList'
 
-const mapStateToProps = (state) => ({
-todos:
-  state.todos.allTodos
+const mapStateToProps = (store) => ({
+todos: store.todos.allTodos,
+visibleTodos: store.todos.visibleTodos
 })
 
 class App extends Component {
